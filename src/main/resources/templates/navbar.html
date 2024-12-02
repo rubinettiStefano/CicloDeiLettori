@@ -21,6 +21,7 @@
       justify-content: space-between;
       background-color: #333;
       padding: 10px 20px;
+      margin-bottom: 1rem;
     }
 
     .navbar img {
@@ -68,13 +69,13 @@
 
 <nav class="navbar">
   <!-- Logo -->
-  <a href="#">
-    <img src="logo.png" alt="Logo">
+  <a href="/">
+    <img src="/logoLettori.png" alt="Logo">
   </a>
 
   <!-- Link della navbar -->
   <ul class="navbar-links">
-    <li><a href="#home">Home</a></li>
+    <li><a href="/">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -82,7 +83,8 @@
   </ul>
 
   <!-- Pulsante opzionale -->
-  <button class="button">Sign Up</button>
+  <a th:if="${session.user!=null}" class="button" href="/credentials/logout">Log Out</a>
+  <p th:if="${session.user==null}" class="button">LOGGATI</p>
 </nav>
 
 </body>

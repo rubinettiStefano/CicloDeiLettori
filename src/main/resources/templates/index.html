@@ -3,8 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <style>
+
+        form {
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        form input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        form input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        form input[type="submit"]:nth-child(3) {
+            background-color: #28a745;
+        }
+
+        form input[type="submit"]:nth-child(3):hover {
+            background-color: #218838;
+        }
+
+        form input[type="submit"]:nth-child(4) {
+            background-color: #17a2b8;
+        }
+
+        form input[type="submit"]:nth-child(4):hover {
+            background-color: #117a8b;
+        }
+    </style>
 </head>
 <body>
     <div th:insert="~{navbar}"></div>
+    <form th:if="${session.user==null}" action="/credentials" method="post">
+        <input type="text" name="username" placeholder="Username" />
+        <input type="text" name="password" placeholder="Password" />
+
+        <input type="submit" name="type" value="LOGIN"/>
+        <input type="submit" name="type" value="REGISTER as AUTHOR"/>
+        <input type="submit" name="type" value="REGISTER as READER"/>
+    </form>
+    <div th:if="${session.user!=null}">
+
+        <h1 style="text-align: center">BENVENUTO <span th:text="${session.user.username}"></span></h1>
+    </div>
+
+<div th:if="${message!=null}">
+    <h2 style="text-align: center;color: red" th:text="${message}"></h2>
+</div>
 </body>
 </html>
