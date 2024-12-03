@@ -3,10 +3,7 @@ package com.generation.ciclodeilettori.controllers.helpers;
 import com.generation.ciclodeilettori.exception.DuplicateUsernameException;
 import com.generation.ciclodeilettori.exception.InvalidCredentialsException;
 import com.generation.ciclodeilettori.exception.InvalidPasswordException;
-import com.generation.ciclodeilettori.model.entities.Author;
-import com.generation.ciclodeilettori.model.entities.Reader;
-import com.generation.ciclodeilettori.model.entities.SubscriptionType;
-import com.generation.ciclodeilettori.model.entities.User;
+import com.generation.ciclodeilettori.model.entities.*;
 import com.generation.ciclodeilettori.model.repositories.ArticleRepository;
 import com.generation.ciclodeilettori.model.repositories.AuthorRepository;
 import com.generation.ciclodeilettori.model.repositories.ReaderRepository;
@@ -14,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //beanizza la classe. crea in automatico un oggetto di questa classe all'avvio del programma
 //che viene messo nell'application context.
@@ -64,6 +63,57 @@ public class ControllerHelperImpl implements ControllerHelper
 				return user;
 
 		throw new InvalidCredentialsException();
+	}
+
+	@Override
+	public void saveArticle(Article article)
+	{
+		artRepo.save(article);
+	}
+
+	@Override
+	public List<Article> getArticlesFor(Reader reader)
+	{
+		List<String> tagsReader = reader.getPreferredTagsList();
+		List<Article> allArticles = artRepo.findAll();
+		List<Article> res = new ArrayList<>();
+		for(Article a : allArticles)
+		{
+			List<String> tagsArticle = a.getTagsList();
+
+			//art tags -> Storia Filosofia News
+			//rea tags -> News Arte
+			//tra i due sopra c'è un tag in comune, il lettore può leggere articolo
+
+			//art tags -> Storia Filosofia News
+			//rea tags -> Politica Arte
+			//tra i due sopra NON c'è un tag in comune, il lettore NON può leggere articolo
+//			boolean comune = false;
+//			for(String tag : tagsArticle)
+//			{
+//				for (String tagReader : tagsReader)
+//					if(tag.equals(tagReader))
+//						comune = true;
+//			}
+
+
+			//solo se c'è una String, quindi un tag in comune
+
+//			Set<String> tuttiTags = new HashSet<>();
+//			tuttiTags.addAll(tagsArticle);
+//			tuttiTags.addAll(tagsReader);
+//			if(tuttiTags.size()!= (tagsReader.size()+tagsArticle.size()))
+//				res.add(a);
+
+			List<String> tags = new ArrayList<>(tagsArticle);
+			tags.removeAll(tagsReader);
+
+			if(tags.size()!=tagsArticle.size())
+				res.add(a);
+
+		}
+
+		return res;
 	}
 
 	private List<User> getAllUsers()

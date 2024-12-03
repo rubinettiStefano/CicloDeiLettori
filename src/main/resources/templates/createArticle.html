@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Article</title>
+  <style>
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .form-container form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container form input[type="text"],
+    .form-container form textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container form input[type="text"]:focus,
+    .form-container form textarea:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .form-container form textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    .form-container form input[type="submit"] {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container form input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .form-container form h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{navbar}"></div>
+<div class="form-container">
+  <form method="POST" action="/articles">
+    <h2>Create Article</h2>
+    <input type="text" name="title" placeholder="Title" />
+    <input type="text" name="synopsis" placeholder="Synopsis" />
+    <textarea name="content" placeholder="Content"></textarea>
+    <input type="text" name="tags" placeholder="Tags" />
+    <input type="submit" value="Create Article" />
+  </form>
+</div>
+</body>
+</html>

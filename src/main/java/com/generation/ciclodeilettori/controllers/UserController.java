@@ -40,6 +40,7 @@ public class UserController
 		}
 
 		session.setAttribute("user", user);
+		session.setAttribute("type", user instanceof Reader ? "reader" : "author");
 		return "index";
 	}
 

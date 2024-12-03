@@ -1,6 +1,7 @@
 package com.generation.ciclodeilettori.controllers.helpers;
 
 import com.generation.ciclodeilettori.exception.DuplicateUsernameException;
+import com.generation.ciclodeilettori.exception.ForbiddenPageException;
 import com.generation.ciclodeilettori.exception.InvalidCredentialsException;
 import com.generation.ciclodeilettori.exception.InvalidPasswordException;
 import org.springframework.stereotype.Controller;
@@ -30,5 +31,11 @@ public class UniversalExceptionHandler
 	{
 		model.addAttribute("message", "Password fa schifo, più lettere, più maiuscole, più minuscole");
 		return "index";
+	}
+
+	@ExceptionHandler(ForbiddenPageException.class)
+	public String handleForbidden(ForbiddenPageException e)
+	{
+		return "forbidden";
 	}
 }

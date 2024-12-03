@@ -76,8 +76,8 @@
   <!-- Link della navbar -->
   <ul class="navbar-links">
     <li><a href="/">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
+    <li th:if="${session.type!=null && session.type.equals('author')}" ><a href="/articles">Create Article</a></li>
+    <li th:if="${session.type!=null && session.type.equals('reader')}"><a href="/reader">Leggi</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#blog">Blog</a></li>
   </ul>
