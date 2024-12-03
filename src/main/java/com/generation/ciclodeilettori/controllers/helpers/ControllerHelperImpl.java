@@ -116,6 +116,12 @@ public class ControllerHelperImpl implements ControllerHelper
 		return res;
 	}
 
+	@Override
+	public Article getSingleArticle(int id)
+	{
+		return artRepo.findById(id).get();
+	}
+
 	private List<User> getAllUsers()
 	{
 		List<User> all = new ArrayList<>();

@@ -34,4 +34,6 @@ public interface ControllerHelper
 	 * Prendo solo gli articoli con tag in comune al lettore
 	 */
 	List<Article> getArticlesFor(Reader reader);
+
+	Article getSingleArticle(int id);
 }

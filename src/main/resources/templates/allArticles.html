@@ -8,7 +8,7 @@
   <div th:insert="~{navbar}"></div>
   <div th:each="art : ${articles}">
 
-    <h2><span th:text="${art.getTitle()}"></span></h2>
+    <h2><a th:href="@{/reader/article(id=${art.id})}"><span th:text="${art.getTitle()}"></span></a></h2>
 
   </div>
 </body>
